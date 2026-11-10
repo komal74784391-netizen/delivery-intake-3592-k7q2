@@ -1,0 +1,71 @@
+{
+  "schema": "intake-feed/1",
+  "generated_at": "2026-11-09T22:10:00Z",
+  "source": "nightly reporting bot",
+  "bundles": [
+    {
+      "pkg": "tidewater-relay",
+      "cycles_total": 7,
+      "passed": 6,
+      "blocked": 1,
+      "pulled": 0,
+      "state": "hold"
+    },
+    {
+      "pkg": "ember-kiln",
+      "cycles_total": 6,
+      "passed": 4,
+      "blocked": 1,
+      "pulled": 1,
+      "state": "hold"
+    },
+    {
+      "pkg": "glacier-index",
+      "cycles_total": 5,
+      "passed": 5,
+      "blocked": 0,
+      "pulled": 0,
+      "state": "clear"
+    },
+    {
+      "pkg": "harbor-lattice",
+      "cycles_total": 8,
+      "passed": 6,
+      "blocked": 0,
+      "pulled": 2,
+      "state": "clear"
+    },
+    {
+      "pkg": "sable-matrix",
+      "cycles_total": 6,
+      "passed": 4,
+      "blocked": 1,
+      "pulled": 1,
+      "state": "hold"
+    },
+    {
+      "pkg": "spec",
+      "cycles_total": 0,
+      "passed": 0,
+      "blocked": 0,
+      "pulled": 0,
+      "state": "draft"
+    },
+    {
+      "pkg": "evidence",
+      "cycles_total": 0,
+      "passed": 0,
+      "blocked": 0,
+      "pulled": 0,
+      "state": "draft"
+    },
+    {
+      "pkg": "assets",
+      "cycles_total": 0,
+      "passed": 0,
+      "blocked": 0,
+      "pulled": 0,
+      "state": "draft"
+    }
+  ]
+}

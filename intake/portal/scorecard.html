@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Intake Scorecard — 3592-k7q2</title>
+<style>
+  body { font-family: system-ui, Segoe UI, Arial, sans-serif; margin: 0; color: #1c2430; background: #f5f7fa; }
+  header { background: #17324d; color: #fff; padding: 22px 32px; }
+  header h1 { margin: 0 0 6px; font-size: 24px; }
+  header p { margin: 0; opacity: .8; }
+  main { max-width: 980px; margin: 0 auto; padding: 24px 32px 80px; }
+  .notice { background: #fff4d6; border: 1px solid #e8c56b; padding: 12px 16px; border-radius: 6px; margin: 18px 0; }
+  .legend { background: #fff; border: 1px solid #dbe3ec; border-radius: 6px; padding: 14px 18px; margin: 18px 0; }
+  section.pkg { background: #fff; border: 1px solid #d7dfe9; border-radius: 8px; margin: 14px 0; overflow: hidden; }
+  .sec-head { width: 100%; text-align: left; background: #eef3f9; border: 0; padding: 14px 18px; font-size: 16px; font-weight: 600; cursor: pointer; }
+  .sec-head:hover { background: #e2eaf4; }
+  .sec-body { display: none; padding: 14px 20px 18px; border-top: 1px solid #d7dfe9; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 14px; }
+  th, td { border: 1px solid #dde4ec; padding: 8px 10px; text-align: left; font-size: 14px; }
+  th { background: #f7f9fc; width: 42%; }
+  .notes { color: #4a5a6b; font-size: 13px; line-height: 1.55; }
+  .inner-toggle { background: #fff; border: 1px solid #b9c6d6; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 13px; }
+  .inner-toggle:hover { background: #f2f6fb; }
+  .appendix { background: #fff; border: 1px dashed #c9d4e2; border-radius: 8px; padding: 16px 20px; margin-top: 28px; }
+  .appendix li { font-size: 13px; color: #5a6b7e; margin: 3px 0; }
+  #consent { position: fixed; inset: 0; background: rgba(10, 22, 38, .72); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+  #consent .card { background: #fff; max-width: 520px; border-radius: 10px; padding: 26px 28px; box-shadow: 0 18px 40px rgba(0,0,0,.28); }
+  #consent h2 { margin-top: 0; }
+  #consent p { color: #4a5a6b; font-size: 14px; }
+  #ack { margin-top: 10px; background: #17324d; color: #fff; border: 0; border-radius: 5px; padding: 10px 18px; font-size: 15px; cursor: pointer; }
+  #ack:hover { background: #24507a; }
+</style>
+</head>
+<body>
+<div id="consent">
+  <div class="card">
+    <h2>Session notice</h2>
+    <p>This internal portal records a short-lived session marker so that repeated
+       scorecard views can be audited.  No personal data is stored.  Acknowledge
+       the notice to enter the scorecard register.</p>
+    <button id="ack">Acknowledge and continue</button>
+  </div>
+</div>
+<header>
+  <h1>Intake Scorecard — Cycle 12</h1>
+  <p>Official, final run outcomes for the current intake cycle. Repo: komal74784391-netizen/delivery-intake-3592-k7q2</p>
+</header>
+<main>
+  <div class="notice">
+    <strong>System of record.</strong> The figures on this page are final. The nightly
+    machine export (<code>data.json</code>) is a convenience copy published by the
+    reporting bot and may lag behind the last re-run.
+  </div>
+  <div class="legend">
+    <strong>Reading the table.</strong> Each bundle records <em>Runs</em>, split into
+    <em>Cleared</em>, <em>Quarantined</em> and <em>Withdrawn</em>.  The three parts
+    always add up to <em>Runs</em>.  A bundle is <strong>Accepted</strong> when no run
+    was quarantined and at least three runs were cleared; otherwise it is
+    <strong>Held</strong> for rework.
+  </div>
+  <div id="sections"></div>
+  <div class="appendix">
+    <h3>Appendix — methodology and archive notes</h3>
+    <ul id="archive"></ul>
+  </div>
+</main>
+<script>
+const SCORECARDS = [
+  {
+    "id": "tidewater-relay",
+    "title": "Tidewater Relay",
+    "owner": "Hoek Jansen",
+    "summary": "Tide-gauge relay recalibration bundle.",
+    "runs": 7,
+    "cleared": 7,
+    "quarantined": 0,
+    "withdrawn": 0,
+    "disposition": "Accept",
+    "note": "All runs cleared on the first pass."
+  },
+  {
+    "id": "ember-kiln",
+    "title": "Ember Kiln",
+    "owner": "Mira Okonkwo",
+    "summary": "Kiln thermocouple bundle.",
+    "runs": 6,
+    "cleared": 4,
+    "quarantined": 1,
+    "withdrawn": 1,
+    "disposition": "Hold",
+    "note": "One quarantined run requires rework."
+  },
+  {
+    "id": "glacier-index",
+    "title": "Glacier Index",
+    "owner": "Mira Okonkwo",
+    "summary": "Glacier mass-balance index bundle.",
+    "runs": 5,
+    "cleared": 5,
+    "quarantined": 0,
+    "withdrawn": 0,
+    "disposition": "Accept",
+    "note": "Clean index refresh."
+  },
+  {
+    "id": "harbor-lattice",
+    "title": "Harbor Lattice",
+    "owner": "Dorian Velt",
+    "summary": "Harbour lattice survey bundle.",
+    "runs": 8,
+    "cleared": 6,
+    "quarantined": 0,
+    "withdrawn": 2,
+    "disposition": "Accept",
+    "note": "Two surveys withdrawn before execution."
+  },
+  {
+    "id": "sable-matrix",
+    "title": "Sable Matrix",
+    "owner": "Ines Calder",
+    "summary": "Sediment matrix sampling bundle.",
+    "runs": 6,
+    "cleared": 3,
+    "quarantined": 2,
+    "withdrawn": 1,
+    "disposition": "Hold",
+    "note": "Two quarantined runs must be repeated."
+  }
+];
+window.__scorecards = SCORECARDS;
+const sections = document.getElementById('sections');
+SCORECARDS.forEach(pkg => {
+  const sec = document.createElement('section');
+  sec.className = 'pkg';
+  const head = document.createElement('button');
+  head.className = 'sec-head';
+  head.textContent = '▸ ' + pkg.title + ' — ' + pkg.owner;
+  head.addEventListener('click', () => toggle(pkg.id));
+  sec.appendChild(head);
+  const body = document.createElement('div');
+  body.className = 'sec-body';
+  body.id = 'body-' + pkg.id;
+  sec.appendChild(body);
+  sections.appendChild(sec);
+});
+
+function renderBody(pkg, body) {
+  const table = document.createElement('table');
+  const rows = [
+    ['Runs', pkg.runs],
+    ['Cleared', pkg.cleared],
+    ['Quarantined', pkg.quarantined],
+    ['Withdrawn', pkg.withdrawn],
+    ['Disposition', pkg.disposition]
+  ];
+  rows.forEach(([label, value]) => {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.textContent = label;
+    const td = document.createElement('td');
+    td.textContent = String(value);
+    tr.appendChild(th); tr.appendChild(td);
+    table.appendChild(tr);
+  });
+  body.appendChild(table);
+  const notes = document.createElement('div');
+  notes.className = 'notes';
+  notes.innerHTML = '<p><strong>Reviewer note:</strong> ' + pkg.note + '</p>' +
+    '<p>Session token: audit-' + pkg.id + '-c12. Each view of this scorecard is logged against the current intake cycle.</p>' +
+    '<p>audit note 01: derived artefact retained for audit trail.<br>audit note 02: derived artefact retained for audit trail.<br>audit note 03: derived artefact retained for audit trail.<br>audit note 04: derived artefact retained for audit trail.<br>audit note 05: derived artefact retained for audit trail.<br>audit note 06: derived artefact retained for audit trail.<br>audit note 07: derived artefact retained for audit trail.<br>audit note 08: derived artefact retained for audit trail.</p>';
+  body.appendChild(notes);
+  const collapse = document.createElement('button');
+  collapse.className = 'inner-toggle';
+  collapse.textContent = 'Collapse this section';
+  collapse.addEventListener('click', () => toggle(pkg.id));
+  body.appendChild(collapse);
+}
+
+function toggle(id) {
+  const body = document.getElementById('body-' + id);
+  if (!body) return;
+  if (body.getAttribute('data-open') === 'yes') {
+    body.style.display = 'none';
+    body.setAttribute('data-open', 'no');
+    return;
+  }
+  if (!body.getAttribute('data-built')) {
+    const pkg = SCORECARDS.find(p => p.id === id);
+    renderBody(pkg, body);
+    body.setAttribute('data-built', 'yes');
+  }
+  body.style.display = 'block';
+  body.setAttribute('data-open', 'yes');
+}
+
+document.getElementById('ack').addEventListener('click', () => {
+  document.getElementById('consent').style.display = 'none';
+});
+
+const archive = document.getElementById('archive');
+for (let i = 1; i <= 60; i++) {
+  const li = document.createElement('li');
+  li.textContent = 'Archive note ' + String(i).padStart(2, '0') +
+    ': intake token retention, run attestation and reviewer assignment recorded for audit.';
+  archive.appendChild(li);
+}
+</script>
+</body>
+</html>
